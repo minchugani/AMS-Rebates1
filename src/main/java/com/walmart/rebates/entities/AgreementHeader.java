@@ -246,6 +246,36 @@ int agrnum = (int) q.get(0) ;
 			        this.agritmdtl.remove(s);
 			        } 
 			    }
+			  
+			  for (AgreementStores s : this.agrstrdtl) {
+			    	 int i ;
+			    	 i = s.getAgrNum() ;
+			    	 if(i==0) {
+			         s.setAgrNum(agrtemp);
+			        this.agrstrdtl.add(s) ;
+			        this.agrstrdtl.remove(s);
+			        } 
+			    }
+			  
+			  for (AgreementTiers s : this.agrtiers) {
+			    	 int i ;
+			    	 i = s.getAgrNum() ;
+			    	 if(i==0) {
+			         s.setAgrNum(agrtemp);
+			        this.agrtiers.add(s) ;
+			        this.agrtiers.remove(s);
+			        } 
+			    }
+			  
+			  for (AgreementVendor s : this.agrvendtl) {
+			    	 int i ;
+			    	 i = s.getAgrNum() ;
+			    	 if(i==0) {
+			         s.setAgrNum(agrtemp);
+			         this.agrvendtl.add(s) ;
+			         this.agrvendtl.remove(s);
+			        } 
+			    }
 				this.agrNum = agrtemp ;
 	//getagrs obj = new getagrs() ;
 	//obj.getdata(); */
