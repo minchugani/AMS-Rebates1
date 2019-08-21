@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class AgreementTiers implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "\"AgreementNum\"")
 	private int agrNum;
 

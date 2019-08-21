@@ -13,6 +13,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -36,7 +37,6 @@ public class AgreementItems implements Serializable{
 	
 //	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
-	  @GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "\"AgreementNum\"")
 	private int agrNum;
 	

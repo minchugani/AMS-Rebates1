@@ -4,20 +4,36 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Persistence;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.Query;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.apache.olingo.odata2.api.processor.ODataContext;
+//import org.springframework.data.jpa.repository.Query;
+
+import com.walmart.rebates.utils.EntityManagerUtility;
+//import com.walmart.rebates.utils.getagrs;
+//import com.walmart.rebates.utils.GetAgreements;
 
 
 
@@ -25,13 +41,7 @@ import javax.persistence.TemporalType;
 @Table(name = "\"AgreementHeader\"")
 //@SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
 public class AgreementHeader implements Serializable {
-	
 	@Id
-   @GeneratedValue(strategy=GenerationType.IDENTITY)
-// @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
-// @SequenceGenerator(name="book_generator", sequenceName = "book_seq", allocationSize=50)
-  //  @GeneratedValue
-	
 	@Column(name = "\"AgreementNum\"")
 	private int agrNum;
 
@@ -67,11 +77,11 @@ public class AgreementHeader implements Serializable {
 	@Column(name = "\"PaymentTerms\"")
 	private String paymentTerms;
 
-	@OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.PERSIST , orphanRemoval = true)
 	@JoinColumn(name = "\"AgreementNum\"", referencedColumnName = "\"AgreementNum\"" , insertable = false , updatable = false)
 	private Collection<AgreementItems> agritmdtl;
 
-	@OneToMany(cascade = CascadeType.ALL , orphanRemoval = true)
+	@OneToMany(cascade = CascadeType.PERSIST , orphanRemoval = true)
 	@JoinColumn(name = "\"AgreementNum\"", referencedColumnName = "\"AgreementNum\"" , insertable = false , updatable = false)
 	private Collection<AgreementStores> agrstrdtl;
 
@@ -209,4 +219,35 @@ public class AgreementHeader implements Serializable {
 		this.agrtiers = agrtiers;
 	}
 
+@PrePersist
+public void cal() { 
+	int agrtemp;
+	AgreementItems agritm = new AgreementItems() ;
+ //   agritm.setAgrNum(100000098);
+   
+	EntityManagerFactory factory = Persistence.createEntityManagerFactory("rebates");
+	EntityManager em = factory.createEntityManager();
+	List q = em.createNativeQuery("select a.agreement_num from agreement_header a order by a.agreement_num desc").getResultList();
+	     
+	 // int element = arr.get(2); 
+int agrnum = (int) q.get(0) ;
+			  if (!(q.isEmpty())) { 
+		agrtemp = 	agrnum + 1 ;
+			  }
+			  else {
+				 agrtemp = 10000001 ;  
+			  }
+			  for (AgreementItems s : this.agritmdtl) {
+			    	 int i ;
+			    	 i = s.getAgrNum() ;
+			    	 if(i==0) {
+			         s.setAgrNum(agrtemp);
+			        this.agritmdtl.add(s) ;
+			        this.agritmdtl.remove(s);
+			        } 
+			    }
+				this.agrNum = agrtemp ;
+	//getagrs obj = new getagrs() ;
+	//obj.getdata(); */
+}
 }

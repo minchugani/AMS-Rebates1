@@ -17,11 +17,11 @@ import javax.persistence.Table;
 @IdClass(AgrVenKeys.class)
 public class AgreementVendor implements Serializable {
 	@Id 
-	@GeneratedValue
+//	@GeneratedValue
 	@Column(name = "\"AgreementNum\"")
-	private int agrnum;
+	private int agrNum;
 	
-	@Id
+    @Id
 	@Column(name = "\"VendorNumber\"")
 	private String vendorNumber;
 	
@@ -43,13 +43,15 @@ public class AgreementVendor implements Serializable {
 		this.vendorNumber = vendorNumber;
 	}
 
-	public int getAgrnum() {
-		return agrnum;
+	public int getAgrNum() {
+		return agrNum;
 	}
 
-	public void setAgrnum(int agrnum) {
-		this.agrnum = agrnum;
+	public void setAgrNum(int agrNum) {
+		this.agrNum = agrNum;
 	}
+
+	
 
 	/*public AgreementHeader getAgrHeader() {
 		return agrHeader;

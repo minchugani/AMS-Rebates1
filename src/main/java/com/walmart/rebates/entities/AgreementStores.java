@@ -33,15 +33,34 @@ public class AgreementStores implements Serializable {
 	}*/
 	
 	
-	@Id
-	  @GeneratedValue(strategy=GenerationType.IDENTITY)
+	
+	//  @GeneratedValue(strategy=GenerationType.IDENTITY)
 	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
 	@Column(name = "\"AgreementNum\"")
 	private int agrNum;
 	
 	@Id
 	@Column(name = "\"StoreID\"")
 	private int storeID;
+
+	public int getAgrNum() {
+		return agrNum;
+	}
+
+	public void setAgrNum(int agrNum) {
+		this.agrNum = agrNum;
+	}
+
+	public int getStoreID() {
+		return storeID;
+	}
+
+	public void setStoreID(int storeID) {
+		this.storeID = storeID;
+	}
+
+	
 	
 /*	@ManyToOne(cascade= CascadeType.ALL)
 	@JoinColumn(name = "\"StoreID\"" , referencedColumnName = "\"StoreID\"", insertable = false, updatable = false)
@@ -58,22 +77,7 @@ public class AgreementStores implements Serializable {
 
 	
 
-	public int getStoreID() {
-		return storeID;
-	}
-
-	public int getAgrNum() {
-		return agrNum;
-	}
-
-	public void setAgrNum(int agrNum) {
-		this.agrNum = agrNum;
-	}
-
-	public void setStoreID(int storeID) {
-		this.storeID = storeID;
-	}
-
+	
 	
 	
 

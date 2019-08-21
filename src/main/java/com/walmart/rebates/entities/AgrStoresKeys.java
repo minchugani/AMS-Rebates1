@@ -9,18 +9,13 @@ import javax.persistence.GeneratedValue;
 public class AgrStoresKeys implements Serializable {
 	
 	private int storeID;
-	
-	
-	public int getStoreID() {
-		return storeID;
-	}
-	public void setStoreID(int storeID) {
-		this.storeID = storeID;
-	}
+	@Column(name = "\"AgreementNum\"")
+	private int agrNum;
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + agrNum;
 		result = prime * result + storeID;
 		return result;
 	}
@@ -33,10 +28,14 @@ public class AgrStoresKeys implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		AgrStoresKeys other = (AgrStoresKeys) obj;
+		if (agrNum != other.agrNum)
+			return false;
 		if (storeID != other.storeID)
 			return false;
 		return true;
 	}
+	
+	
 	
 	
 	
